@@ -13,7 +13,7 @@ namespace WebApplication2
     public partial class usersignup : System.Web.UI.Page
     {
 
-        string constr = ConfigurationManager.ConnectionStrings["con"].ConnectionString;
+        string constr = ConfigurationManager.ConnectionStrings["constr"].ConnectionString;
         protected void Page_Load(object sender, EventArgs e)
         {
 
