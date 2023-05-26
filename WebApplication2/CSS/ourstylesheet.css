@@ -1,0 +1,16 @@
+﻿.footerlinks {
+    color:goldenrod;
+    text-decoration: none !important;
+}
+
+    .footerlinks:hover {
+        color:cyan;
+    }
+
+#footer1 {
+    background-color:darkred;
+}
+
+#footer2 {
+    background-color:chocolate;
+}
