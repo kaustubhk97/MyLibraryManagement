@@ -11,6 +11,64 @@ namespace WebApplication2
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            try 
+            {
+
+            if(Session["role"] != null && Session["role"].Equals(""))
+            {
+                    LinkButton1.Visible = true; //User login link button
+                    LinkButton2.Visible = true; //Sign up link button
+
+                    LinkButton3.Visible = false; //Logout link button
+                    LinkButton7.Visible = false; //Hello user link button
+
+                    LinkButton6.Visible = true; //Admin Login link button
+                    LinkButton11.Visible = false; //author manangement link button
+                    LinkButton12.Visible = false; //Publisher management link button
+                    LinkButton8.Visible = false; //Book inventory  link button
+                    LinkButton9.Visible = false; //book issuing link button
+                    LinkButton10.Visible = false; //member management link button
+
+
+
+                }
+            else if(Session["role"] != null && Session["role"].Equals("user"))
+                {
+                    LinkButton1.Visible = false; //User login link button
+                    LinkButton2.Visible = false; //Sign up link button
+
+                    LinkButton3.Visible = true; //Logout link button
+                    LinkButton7.Visible = true; //Hello user link button
+
+                    LinkButton7.Text = "Howdy, " +Session["username"].ToString();
+
+                    LinkButton6.Visible = true; //Admin Login link button
+                    LinkButton11.Visible = false; //author manangement link button
+                    LinkButton12.Visible = false; //Publisher management link button
+                    LinkButton8.Visible = false; //Book inventory  link button
+                    LinkButton9.Visible = false; //book issuing link button
+                }
+                else if (Session["role"] != null && Session["role"].Equals("admin"))
+                {
+                    LinkButton1.Visible = false; //User login link button
+                    LinkButton2.Visible = false; //Sign up link button
+
+                    LinkButton3.Visible = true; //Logout link button
+                    LinkButton7.Visible = true; //Hello user link button
+
+                    LinkButton7.Text = "Howdy Admin";
+
+                    LinkButton6.Visible = false; //Admin Login link button
+                    LinkButton11.Visible = true; //author manangement link button
+                    LinkButton12.Visible = true; //Publisher management link button
+                    LinkButton8.Visible = true; //Book inventory  link button
+                    LinkButton9.Visible = true; //book issuing link button
+                }
+            }
+            catch(Exception ex)
+            {
+                
+            }
 
         }
 
@@ -58,5 +116,27 @@ namespace WebApplication2
         {
             Response.Redirect("usersignup.aspx");
         }
+
+        protected void LinkButton3_Click(object sender, EventArgs e)
+        {
+            Session["username"] = "";
+            Session["fullname"] = "";
+            Session["role"] = "";
+            Session["status"] = "";
+            LinkButton1.Visible = true; //User login link button
+            LinkButton2.Visible = true; //Sign up link button
+
+            LinkButton3.Visible = false; //Logout link button
+            LinkButton7.Visible = false; //Hello user link button
+
+            LinkButton6.Visible = true; //Admin Login link button
+            LinkButton11.Visible = false; //author manangement link button
+            LinkButton12.Visible = false; //Publisher management link button
+            LinkButton8.Visible = false; //Book inventory  link button
+            LinkButton9.Visible = false; //book issuing link button
+            LinkButton10.Visible = false; //member management link button
+
+            Response.Redirect("homepage.aspx");
+        }
     }
-}
+    }

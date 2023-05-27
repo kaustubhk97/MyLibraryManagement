@@ -40,7 +40,7 @@
                                 </div>
                                 <div class="form-group">
                                     <a href="usersignup.aspx">
-                                        <input id="Button2" class="btn btn-outline-primary btn-block btn-lg" type="button" value="Sign Up" /></a>
+                                        <input id="Button2" style="text-decoration:none" class="btn btn-outline-primary btn-block btn-lg" type="button" value="Sign Up" /></a>
                                 </div>
                             </div>
                         </div>
