@@ -65,7 +65,7 @@ namespace WebApplication2
 
         protected void Button1_Click(object sender, EventArgs e)// Go button
         {
-
+            getAuthorByID();
         }
         void deleteAuthor()
         {
@@ -80,9 +80,6 @@ namespace WebApplication2
 
                 using (SqlCommand cmd = new SqlCommand(q, con))
                 {
-
-                    
-
                     // Execute the query
                     cmd.ExecuteNonQuery();
                 }
@@ -95,6 +92,41 @@ namespace WebApplication2
             catch (Exception ex)
             {
                 Response.Write("<script>alert('" + ex.Message + "');</script>");
+            }
+        }
+        void getAuthorByID()
+        {
+            try
+            {
+                SqlConnection con = new SqlConnection(constr);
+                if (con.State == ConnectionState.Closed)
+                {
+                    con.Open();
+                }
+                string q = "select * from author_master_tbl where author_id='" + TextBox1.Text.Trim() + "'";
+
+                SqlCommand cmd = new SqlCommand(q, con);
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+
+                DataTable dt = new DataTable();
+
+                da.Fill(dt);
+
+                if (dt.Rows.Count >= 1)
+                {
+                    TextBox2.Text = dt.Rows[0][1].ToString();
+                }
+                else
+                {
+                    Response.Write("<script>alert('Invalid Author ID');</script>");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Response.Write("<script>alert('" + ex.Message + "');</script>");
+               
             }
         }
         void updateAuthor()

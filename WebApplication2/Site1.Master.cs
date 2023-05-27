@@ -63,6 +63,7 @@ namespace WebApplication2
                     LinkButton12.Visible = true; //Publisher management link button
                     LinkButton8.Visible = true; //Book inventory  link button
                     LinkButton9.Visible = true; //book issuing link button
+                    LinkButton10.Visible = true; //member management link button
                 }
             }
             catch(Exception ex)
