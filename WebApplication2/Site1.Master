@@ -25,6 +25,9 @@
      <%-- Custom JQuery--%>
 
     <script src="Scripts/myscript.js"></script>
+     <%-- Datatables JQuery--%>
+
+    <script src="datatables/js/jquery.dataTables.min.js"></script>
 
 
     <asp:ContentPlaceHolder ID="head" runat="server">

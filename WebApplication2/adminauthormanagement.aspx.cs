@@ -89,6 +89,7 @@ namespace WebApplication2
 
                 con.Close();
                 Response.Write("<script>alert('Author Deleted Successfully');</script>");
+                GridView1.DataBind();
 
             }
             catch (Exception ex)
@@ -118,6 +119,7 @@ namespace WebApplication2
 
                 con.Close();
                 Response.Write("<script>alert('Author Updated Successfully');</script>");
+                GridView1.DataBind();
 
             }
             catch (Exception ex)
@@ -148,6 +150,7 @@ namespace WebApplication2
 
                 con.Close();
                 Response.Write("<script>alert('Author added Successfully');</script>");
+                GridView1.DataBind();
 
             }
             catch (Exception ex)
