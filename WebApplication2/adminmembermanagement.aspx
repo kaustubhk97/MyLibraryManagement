@@ -166,10 +166,10 @@
                             <div class="col">
                                 <asp:GridView ID="GridView1" CssClass="table table-bordered table-hover" runat="server" AutoGenerateColumns="False" DataKeyNames="member_id" DataSourceID="SqlDataSource1">
                                     <Columns>
-                                        <asp:BoundField DataField="member_id" HeaderText="Member ID" SortExpression="member_id" ReadOnly="True" />
+                                        <asp:BoundField DataField="member_id" HeaderText="ID" SortExpression="member_id" ReadOnly="True" />
                                         <asp:BoundField DataField="full_name" HeaderText="Full Name" SortExpression="full_name" />
-                                        <asp:BoundField DataField="account_status" HeaderText="Account Status" SortExpression="account_status" />
-                                        <asp:BoundField DataField="contact_no" HeaderText="Contact No." SortExpression="contact_no" />
+                                        <asp:BoundField DataField="account_status" HeaderText=" Status" SortExpression="account_status" />
+                                        <asp:BoundField DataField="contact_no" HeaderText="Contact " SortExpression="contact_no" />
                                         <asp:BoundField DataField="email" HeaderText="Email" SortExpression="email" />
                                         <asp:BoundField DataField="state" HeaderText="State" SortExpression="state" />
                                         <asp:BoundField DataField="city" HeaderText="City" SortExpression="city" />
