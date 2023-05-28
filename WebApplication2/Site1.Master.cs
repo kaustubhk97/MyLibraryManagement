@@ -105,7 +105,7 @@ namespace WebApplication2
 
         protected void LinkButton4_Click(object sender, EventArgs e)
         {
-            Response.Redirect("userlogin.aspx");
+            Response.Redirect("viewbooks.aspx");
         }
 
         protected void LinkButton1_Click(object sender, EventArgs e)
@@ -138,6 +138,11 @@ namespace WebApplication2
             LinkButton10.Visible = false; //member management link button
 
             Response.Redirect("homepage.aspx");
+        }
+
+        protected void LinkButton7_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("userprofile.aspx");
         }
     }
     }
