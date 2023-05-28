@@ -126,7 +126,7 @@
                             <div class="col-md-4">
                                 <label>Password</label>
                                 <div class="form-group">
-                                    <asp:TextBox ID="TextBox9" class="form-control" placeholder="Enter Password" runat="server" TextMode="Password" ReadOnly="True"></asp:TextBox>
+                                    <asp:TextBox ID="TextBox9" class="form-control" placeholder="Old Password" runat="server" ReadOnly="True"></asp:TextBox>
                                 </div>
 
                             </div>
