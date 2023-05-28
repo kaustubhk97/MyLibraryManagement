@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-
+using System.IO;
 
 namespace WebApplication2
 {
@@ -22,7 +22,7 @@ namespace WebApplication2
 
         protected void LinkButton4_Click(object sender, EventArgs e) //Go Button
         {
-
+            getbookbyID();
 
         }
 
@@ -47,6 +47,59 @@ namespace WebApplication2
         protected void Button2_Click(object sender, EventArgs e)// Delete Button
         {
 
+        }
+        void getbookbyID()
+        {
+            try
+            {
+
+                SqlConnection con = new SqlConnection(constr);
+                if (con.State == ConnectionState.Closed)
+                {
+                    con.Open();
+                }
+                string q = "select * from book_master_tbl where book_id='"+TextBox1.Text.Trim()+"' ";
+                SqlCommand cmd = new SqlCommand(q, con);
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+               if(dt.Rows.Count>=1)
+                {
+                    TextBox2.Text = dt.Rows[0]["book_name"].ToString();
+                    TextBox3.Text = dt.Rows[0]["publish_date"].ToString();
+                    DropDownList1.SelectedValue = dt.Rows[0]["language"].ToString().Trim();
+                    DropDownList2.SelectedValue = dt.Rows[0]["publisher_name"].ToString().Trim();
+                    DropDownList3.SelectedValue = dt.Rows[0]["author_name"].ToString().Trim();
+
+
+                    string[] genre = dt.Rows[0]["genre"].ToString().Trim().Split(',');
+                    for (int i = 0; i < genre.Length; i++)
+                    {
+                        for (int j = 0; j < ListBox1.Items.Count; j++)
+                        {
+                            if(ListBox1.Items[j].ToString()==genre[i])
+                            {
+                                ListBox1.Items[j].Selected = true;
+                            }
+                        }
+
+                    }
+                }
+                else
+                {
+                    Response.Write("<script>alert('Invalid Book iD');</script>");
+                }
+               
+
+
+            }
+            catch (Exception ex)
+            {
+
+                Response.Write("<script>alert('" + ex.Message + "');</script>");
+            }
         }
         void fillAuthorPublisherValues()
         {
@@ -95,10 +148,16 @@ namespace WebApplication2
             try
             {
                 string genres = "";
-                foreach (int item in ListBox1.GetSelectedIndices())
+                foreach (int i in ListBox1.GetSelectedIndices())
                 {
-                    genres = genres + ListBox1.Items[item] + ",";
+                    genres = genres + ListBox1.Items[i] + ",";
                 }
+                genres = genres.Remove(genres.Length - 1); //This line is for removing the excess comma in the end of iteration...
+
+                string filename = Path.GetFileName(FileUpload1.PostedFile.FileName);
+                string filepath = "~/book_inventory/" + filename;
+
+                FileUpload1.PostedFile.SaveAs(Server.MapPath(filepath));
 
                 SqlConnection con = new SqlConnection(constr);
                 if(con.State==ConnectionState.Closed)
@@ -110,24 +169,29 @@ namespace WebApplication2
                 SqlCommand cmd = new SqlCommand(q, con);
                 cmd.Parameters.AddWithValue("@book_id", TextBox1.Text.Trim());
                 cmd.Parameters.AddWithValue("@book_name", TextBox2.Text.Trim());
-               
+                cmd.Parameters.AddWithValue("@genre", genres);
                 cmd.Parameters.AddWithValue("@author_name", DropDownList3.SelectedItem.Value);
                 cmd.Parameters.AddWithValue("@publisher_name", DropDownList2.SelectedItem.Value);
                 cmd.Parameters.AddWithValue("@publish_date", TextBox3.Text.Trim());
                 cmd.Parameters.AddWithValue("@language", DropDownList1.SelectedItem.Value);
-                cmd.Parameters.AddWithValue("@edition", TextBox2.Text.Trim());
-                cmd.Parameters.AddWithValue("@book_cost", TextBox2.Text.Trim());
-                cmd.Parameters.AddWithValue("@no_of_pages", TextBox2.Text.Trim());
-                cmd.Parameters.AddWithValue("@book_description", TextBox2.Text.Trim());
+                cmd.Parameters.AddWithValue("@edition", TextBox9.Text.Trim());
+                cmd.Parameters.AddWithValue("@book_cost", TextBox10.Text.Trim());
+                cmd.Parameters.AddWithValue("@no_of_pages", TextBox11.Text.Trim());
+                cmd.Parameters.AddWithValue("@book_description", TextBox6.Text.Trim());
                 cmd.Parameters.AddWithValue("@actual_stock", TextBox4.Text.Trim());
                 cmd.Parameters.AddWithValue("@current_stock", TextBox4.Text.Trim());
-               
+                cmd.Parameters.AddWithValue("@book_img_link", filepath);
+                cmd.ExecuteNonQuery();
+                con.Close();
+
+                Response.Write("<script>alert('Book Added successfully');</script>");
+                GridView1.DataBind();
 
 
             }
-            catch
+            catch (Exception ex)
             {
-
+                Response.Write("<script>alert('" + ex.Message + "');</script>");
             }
        
         }
@@ -166,6 +230,6 @@ namespace WebApplication2
                 return false;
             }
         }
-
+       
     }
 }
