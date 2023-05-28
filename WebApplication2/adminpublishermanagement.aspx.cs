@@ -13,7 +13,7 @@ namespace WebApplication2
 {
     public partial class adminpublishermanagement : System.Web.UI.Page
     {
-        string constr = ConfigurationManager.ConnectionStrings["constr"].ToString();
+        string constr = ConfigurationManager.ConnectionStrings["constr"].ConnectionString;
         protected void Page_Load(object sender, EventArgs e)
         {
 

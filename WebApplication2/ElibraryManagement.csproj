@@ -2139,7 +2139,7 @@
     <Content Include="images\adminuser.png" />
     <Content Include="images\book-online.png" />
     <Content Include="images\books.png" />
-    <Content Include="images\books1.png" />
+    <Content Include="book_inventory\books1.png" />
     <Content Include="images\bottombanner.jpg" />
     <Content Include="images\Chicken-Biryani-Recipe.jpg" />
     <Content Include="images\defaulters-list.png" />
